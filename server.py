@@ -40,5 +40,15 @@ def create_task(title: str) -> dict:
 
     return task
 
+@mcp.tool()
+def list_tasks() -> list[dict]:
+    """Retrieve all development tasks."""
+    path = PROJECT_DIR / "tasks.json"
+
+    if not path.exists():
+        return []
+
+    return json.loads(path.read_text())
+
 if __name__ == "__main__":
     mcp.run(transport="stdio")
